@@ -24,10 +24,11 @@ import org.xml.sax.InputSource;
 public class XPATHH {
 
     String salida = "";
-    
+    Node yolo;
+    NodeList yolos;
 
     public String EjecutaXPath(File archivo, String consulta) {
-      
+
         try {
 
             //Crea un objeto DocumentBuilderFactory para el DOM (JAXP)
@@ -38,7 +39,7 @@ public class XPATHH {
             XPath xpath = XPathFactory.newInstance().newXPath();
             //Crea un XPathExpression con la consulta deseada
             XPathExpression exp = xpath.compile(consulta);
-            
+
             //Ejecuta la consulta indicando que se ejecute sobre el DOM y que devolverá
             //el resultado como una lista de nodos.
             Object result = exp.evaluate(XMLDoc, XPathConstants.NODESET);
@@ -46,24 +47,25 @@ public class XPATHH {
             System.out.println(nodeList.getLength());
             //Ahora recorre la lista para sacar los resultados
             for (int i = 0; i < nodeList.getLength(); i++) {
-                if(nodeList.getLength()==1)  {
-                    Element movieElement = (Element) nodeList.item(0);
+//                salida = salida + "\n"
+//                        + nodeList.item(i).getChildNodes().item(0).getNodeValue();
+                  
+                  yolo = nodeList.item(i);
+                  yolos = yolo.getChildNodes();
+                   for (int jorge = 0; jorge < yolos.getLength(); jorge++) {
+                     salida = salida.trim() + "\n" + yolos.item(jorge).getTextContent();
                    
-                         NodeList libroAutor = movieElement.getElementsByTagName("Libro");
-                    for (int j = 0; i < libroAutor.getLength(); j++) {
-                        salida = salida.trim() + "\n"
-                        + libroAutor.item(j).getChildNodes().item(0).getNodeValue();
-                    }
+                   
+                   }
+                  salida = salida.trim() + "\n" + "-----------------------" ;
                 
-                }
-                salida = salida.trim() + "\n"
-                        + nodeList.item(i).getChildNodes().item(0).getNodeValue();
             }
-//            System.out.println(salida);
+            System.out.println(salida);
+
             return salida;
         } catch (Exception ex) {
 //            System.out.println("Error: " + ex.toString());
-            return "No se ha podido ejecutar el XPath" ;
+            return "No se ha podido ejecutar el XPath";
         }
     }
 }
