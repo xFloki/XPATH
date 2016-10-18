@@ -1,6 +1,6 @@
 
 import java.io.File;
-import java.io.FileInputStream;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -10,7 +10,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.xml.sax.InputSource;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,6 +26,7 @@ public class XPATHH {
     String salida = "";
     Node yolo;
     NodeList yolos;
+     Element e;
 
     public String EjecutaXPath(File archivo, String consulta) {
 
@@ -47,18 +48,35 @@ public class XPATHH {
             System.out.println(nodeList.getLength());
             //Ahora recorre la lista para sacar los resultados
             for (int i = 0; i < nodeList.getLength(); i++) {
-//                salida = salida + "\n"
-//                        + nodeList.item(i).getChildNodes().item(0).getNodeValue();
-                  
+
                   yolo = nodeList.item(i);
-                  yolos = yolo.getChildNodes();
-                   for (int jorge = 0; jorge < yolos.getLength(); jorge++) {
-                     salida = salida.trim() + "\n" + yolos.item(jorge).getTextContent();
-                   
-                   
+                  
+                 //Si el nodo en el que nos encontramos el Libro añadimos su atributo del año
+                 //en el que se pubico
+                  if(yolo.getNodeName()== "Libro" && yolo.getNodeType() == Node.ELEMENT_NODE ){
+                  e = (Element)yolo;          
+                            salida = salida + "\n" + "Publicado en: " + e.getAttribute("publicado_en");                           
+                  }
+                  
+                  //Creamos un nuevo nodelist a partir de los nodos del nodelist anterior
+                  //para en el caso de que nos encontremos en el nodo libro que a su vez 
+                  //tiene los nodos autor y titulo se creee un nodelist con estos para luego
+                  //imprimir su contenido
+                  yolos = yolo.getChildNodes();                 
+                   for (int j = 0; j < yolos.getLength(); j++) {                   
+                    
+                     
+                     if(yolo.getNodeName()== "Autor"  ){
+                  e = (Element)yolo;          
+                            salida = salida + "\n" + "Autor: ";                           
+                  }
+                  if(yolo.getNodeName()== "Titulo"  ){
+                  e = (Element)yolo;          
+                            salida = salida + "\n" + "Titulo: " ;                           
+                  }
+                   salida = salida + yolos.item(j).getTextContent() + "\n" ;
                    }
-                  salida = salida.trim() + "\n" + "-----------------------" ;
-                
+                  salida = salida.trim() + "\n" + "-----------------------" ;               
             }
             System.out.println(salida);
 
