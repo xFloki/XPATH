@@ -50,6 +50,16 @@ public class XPATHH {
             for (int i = 0; i < nodeList.getLength(); i++) {
 
                   yolo = nodeList.item(i);
+                    if(yolo.getNodeType() == Node.ATTRIBUTE_NODE){
+                        salida = salida.trim() +  "\n"   + "Publicado en: " ;
+                   }  
+                     if(yolo.getNodeName()== "Autor"  ){     
+                            salida = salida.trim() +  "\n"  + "Autor: ";                           
+                  }
+                     if(yolo.getNodeName()== "Titulo"  ){
+                  e = (Element)yolo;          
+                            salida = salida.trim() +  "\n"   + "Titulo: " ;                           
+                  }
                   
                  //Si el nodo en el que nos encontramos el Libro añadimos su atributo del año
                  //en el que se pubico
@@ -65,23 +75,23 @@ public class XPATHH {
                   yolos = yolo.getChildNodes();                 
                    for (int j = 0; j < yolos.getLength(); j++) {                   
                     
-//                     
-//                     if(yolos.item(j).getNodeName()== "Autor"  ){
-//                  e = (Element)yolo;          
-//                            salida = salida.trim() +  "\n"  + "Autor: ";                           
-//                  }
-//                  if(yolos.item(j).getNodeName()== "Titulo"  ){
-//                  e = (Element)yolo;          
-//                            salida = salida.trim() +  "\n"   + "Titulo: " ;                           
-//                  }
+                     
+                     if(yolos.item(j).getNodeName()== "Autor"  ){
+                  e = (Element)yolo;          
+                            salida = salida.trim() +  "\n"  + "Autor: ";                           
+                  }
+                  if(yolos.item(j).getNodeName()== "Titulo"  ){
+                  e = (Element)yolo;          
+                            salida = salida.trim() +  "\n"   + "Titulo: " ;                           
+                  }
 //                  if(yolos.item(j).getNodeName()== "publicado_en"  ){
 //                  e = (Element)yolo;          
 //                            salida = salida.trim() +  "\n"   + "Publicado en: " ;                           
 //                  }
                     
-                    
+                   ;
                   
-                   salida = salida.trim() + yolos.item(j).getNodeName() + " " + yolos.item(j).getTextContent();
+                   salida = salida.trim() + " " + yolos.item(j).getTextContent();
                    }
                   salida = salida.trim() + "\n" + "-----------------------" ;               
             }
