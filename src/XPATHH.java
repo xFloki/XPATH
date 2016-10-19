@@ -65,20 +65,27 @@ public class XPATHH {
                   yolos = yolo.getChildNodes();                 
                    for (int j = 0; j < yolos.getLength(); j++) {                   
                     
-                     
-                     if(yolo.getNodeName()== "Autor"  ){
-                  e = (Element)yolo;          
-                            salida = salida + "\n" + "Autor: ";                           
-                  }
-                  if(yolo.getNodeName()== "Titulo"  ){
-                  e = (Element)yolo;          
-                            salida = salida + "\n" + "Titulo: " ;                           
-                  }
-                   salida = salida + yolos.item(j).getTextContent() + "\n" ;
+//                     
+//                     if(yolos.item(j).getNodeName()== "Autor"  ){
+//                  e = (Element)yolo;          
+//                            salida = salida.trim() +  "\n"  + "Autor: ";                           
+//                  }
+//                  if(yolos.item(j).getNodeName()== "Titulo"  ){
+//                  e = (Element)yolo;          
+//                            salida = salida.trim() +  "\n"   + "Titulo: " ;                           
+//                  }
+//                  if(yolos.item(j).getNodeName()== "publicado_en"  ){
+//                  e = (Element)yolo;          
+//                            salida = salida.trim() +  "\n"   + "Publicado en: " ;                           
+//                  }
+                    
+                    
+                  
+                   salida = salida.trim() + yolos.item(j).getNodeName() + " " + yolos.item(j).getTextContent();
                    }
                   salida = salida.trim() + "\n" + "-----------------------" ;               
             }
-            System.out.println(salida);
+            System.out.println(yolo.getNodeName());
 
             return salida;
         } catch (Exception ex) {
