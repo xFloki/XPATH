@@ -21,6 +21,8 @@ public class MiFrame extends javax.swing.JFrame {
      */
     public MiFrame() {
         initComponents();
+        //posiciono la aplicacion en el entro de la pantalla
+        this.setLocationRelativeTo(null);
     }
 
     /**
